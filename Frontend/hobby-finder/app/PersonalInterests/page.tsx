@@ -55,16 +55,6 @@ export default function About() {
         </div>
       </div>
       <style jsx>{`
-        .background {
-          position: relative;
-          width: 100%;
-          height: 100vh;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-          font-family: 'Isok Web', sans-serif;
-        }
         .content {
           position: relative;
           z-index: 1;
@@ -96,9 +86,6 @@ export default function About() {
           width: 100%;
           max-width: 300px;
         }
-        .blur {
-          filter: blur(8px);
-        }
         .navigation-buttons {
           display: flex;
           justify-content: space-between; /* Changed from center */
@@ -107,34 +94,6 @@ export default function About() {
           width: 200px; /* Set a fixed width */
           margin: 20px auto; /* Center the container using margin auto */
         }
-          .nav-button {
-           display: flex;
-          flex-direction: column;
-          align-items: center;
-          margin: 0 10px; 
-          }
-          .circle-button {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            border: none;
-            background-color: white;
-            color: black;
-            font-size: 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-          }
-          .circle-button:hover {
-            background-color: #f0f0f0;
-          }
-          .nav-button p {
-            margin-top: 5px;
-            color: white;
-            font-size: 1rem;
-          }
       `}</style>
     </div>
   );
