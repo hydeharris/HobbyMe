@@ -39,6 +39,20 @@ export default function About() {
             </div>
           ))}
         </div>
+        <div className="navigation-buttons">
+          <div className="nav-button">
+            <button className="circle-button" onClick={() => console.log("Back clicked")}>
+              ←
+            </button>
+            <p>Back</p>
+          </div>
+          <div className="nav-button">
+            <button className="circle-button" onClick={() => console.log("Next clicked")}>
+              →
+            </button>
+            <p>Next</p>
+          </div>
+        </div>
       </div>
       <style jsx>{`
         .background {
@@ -85,6 +99,42 @@ export default function About() {
         .blur {
           filter: blur(8px);
         }
+        .navigation-buttons {
+          display: flex;
+          justify-content: space-between; /* Changed from center */
+          align-items: center;
+          flex-direction: row;
+          width: 200px; /* Set a fixed width */
+          margin: 20px auto; /* Center the container using margin auto */
+        }
+          .nav-button {
+           display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin: 0 10px; 
+          }
+          .circle-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background-color: white;
+            color: black;
+            font-size: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+          }
+          .circle-button:hover {
+            background-color: #f0f0f0;
+          }
+          .nav-button p {
+            margin-top: 5px;
+            color: white;
+            font-size: 1rem;
+          }
       `}</style>
     </div>
   );
