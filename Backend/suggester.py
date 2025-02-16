@@ -9,40 +9,36 @@ load_dotenv()
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
 class Suggester:
-    def __init__(self, hobbies, responses, user, questions):
-        self.hobbies = [] # list of Hobby objects
-        self.responses = responses # Responses object
-        self.user = user # User's name
-        self.questions = questions # Questions object
+    def __init__(self, hobbies, responsesList, user, questionsList):
+        self.hobbies = []                   # list of Hobby objects
+        self.responsesList = responsesList  # Responses object
+        self.user = user                    # User's name
+        self.questionsList = questionsList  # Questions object
 
     def suggest(self):
-        # This is where the magic happens
         # Use the ChatGPT model to suggest hobbies based on the user's responses
         prompt = "I have answered the following questions regarding what my interests are: " # This is a placeholder prompt
-        for question in self.questions.questions:
+        for question in self.questionsList.questions:       # Add the questions to the prompt
             prompt += question + " "
         prompt += "Based on my responses, what hobbies would you suggest for me? Answer in the following format: (Name of Hobby): (Description of Hobby), etc..."
-        i = 0
-        for response in self.responses.responses:
-            prompt += str(i) + " " + response + " "
-            i += 1
+        for response in self.responsesList.responses:     # Add the responses to the prompt
+            prompt += " " + response + " "                # Add the response to the prompt
 
-        response = openai.chat.completions.create(
+        response = openai.chat.completions.create(      # Get the response from the model
             model="gpt-3.5-turbo",
             messages=[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": prompt}],
             max_tokens=1000
         )
-        print(response.choices[0].message.content)
-        # print(response.choices[0].message.content.split("\n"))
+        print(response.choices[0].message.content) # Print the response from the model
 
        # Parse the response and add the suggested hobbies to the user's list of hobbies 
         paragraph = response.choices[0].message.content.split("\n")
         for hobby in paragraph:
-            if  hobby != "" and hobby[1] == '.':
+            if  hobby != "" and hobby[1] == '.': # Check if the line is a hobby
                 name = hobby.split(":")[0]
                 name = name[3:] # Remove the number and the space
                 description = hobby.split(":")[1]
-                self.hobbies.append(Hobby(name.strip(), description.strip())) 
+                self.hobbies.append(Hobby(name.strip(), description.strip()))   # Add the hobby to the list of hobbies
     
     def add_hobby(self, hobby):
         self.hobbies.append(hobby)
@@ -76,23 +72,23 @@ class Questions:
             self.questions = questions
 
     def add_question(self, question):
-        self.questions.append(question)
+        self.questions.append(question) # Add a question to the list
 
     def remove_question(self, question):
         self.questions.remove(question)
 
 # Example usage
 name = input("Enter your name: ")
-suggester = Suggester([], Responses(), name, Questions())
+suggester = Suggester([], Responses(), name, Questions())   # Create a Suggester object
 
 # Add questions
 for i in range(2):
-    suggester.questions.add_question(input("Enter a question: ")) # Add a question
+    suggester.questionsList.add_question(input("Enter a question: ")) # Add a question
 
 # Answer questions
-for question in suggester.questions.questions:
+for question in suggester.questionsList.questions:
     print(question)
-    suggester.responses.add_response(input("Enter your response: ")) # Add a response
+    suggester.responsesList.add_response(input("Enter your response: ")) # Add a response
 
 # Suggest hobbies using ChatGPT
 suggester.suggest()
