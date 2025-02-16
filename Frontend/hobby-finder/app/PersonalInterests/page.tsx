@@ -5,12 +5,35 @@ import { useState } from "react";
 
 export default function About() {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const items = ["Reading", "Gaming", "Cooking", "Traveling", "Sports", "Music", "Art"];
+
+  const items: string[] = [
+    "Books",
+    "Games",
+    "Strategy",
+    "Travels",
+    "Sports",
+    "Music",
+    "Art",
+    "Competitions",
+    "Learning",
+    "Socializing",
+    "Exploring",
+    "Creating",
+    "Exercising",
+    "Relaxing",
+    "Adventuring",
+    "Nature",
+    "Technology",
+    "Fashion",
+    "Food",
+    "Movies",
+  ];
 
   const toggleItem = (item: string) => {
     setSelectedItems((prev) =>
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     );
+    console.log(selectedItems.toString());
   };
 
   return (
@@ -41,13 +64,9 @@ export default function About() {
         </div>
         <div className="navigation-buttons">
           <div className="nav-button">
-            <button className="circle-button" onClick={() => console.log("Back clicked")}>
-              ←
-            </button>
-            <p>Back</p>
-          </div>
-          <div className="nav-button">
-            <button className="circle-button" onClick={() => console.log("Next clicked")}>
+            <button
+              className="circle-button"
+              onClick={() => console.log(selectedItems.toString())}>
               →
             </button>
             <p>Next</p>
@@ -72,12 +91,14 @@ export default function About() {
           text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
         }
         .scrollable-list {
+          background-color: rgba(255, 255, 255, 1);
           margin-top: 20px;
           max-height: 200px;
           overflow-y: auto;
           display: flex;
           flex-direction: column;
           align-items: center;
+          border-radius: 20px 17px;
         }
         .list-item {
           margin: 10px 0;
@@ -85,6 +106,8 @@ export default function About() {
           justify-content: space-between;
           width: 100%;
           max-width: 300px;
+          color: black;
+          background-color: rgba(255, 255, 255, 0);
         }
         .navigation-buttons {
           display: flex;

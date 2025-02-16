@@ -2,13 +2,15 @@
 
 import Image from "next/image";
 import { useState } from "react";
+import { activities } from "../data/activityData";
 
 export default function About() {
-  const instructions = [
-    { id: 1, name: "Alice" },
-    { id: 2, name: "Bob" },
-    { id: 3, name: "Charlie" },
-  ];
+  const targetActivity = ["Cooking"];
+  const activitesMatch = activities.filter((activity) =>
+    targetActivity.includes(activity.activityName)
+  );
+  const activityProfile = activitesMatch[0];
+  const instructions = activityProfile.steps;
 
   interface ChatMessage {
     id: number;
@@ -75,15 +77,7 @@ export default function About() {
           <div className="hobby-info">
             <div className="hobby-info-subgroup-left">
               <div className="hobby-info-header">About:</div>
-              <div className="bodyText">
-                {" "}
-                Lorem ipsum odor amet, consectetuer adipiscing elit. Elit
-                feugiat aliquet erat mauris nibh ipsum. Nostra diam tortor quam
-                varius; aptent habitant consectetur eleifend. Sodales accumsan
-                ornare massa netus commodo egestas molestie maecenas. Purus
-                habitant eget sit aptent, venenatis at platea. Ex a mi ultrices
-                accumsan torquent ullamcorper
-              </div>
+              <div className="bodyText">{activityProfile.description}</div>
               <div className="hobby-info-header">How to Get Started:</div>
               <div className="bodyText">
                 <ol>
@@ -91,7 +85,7 @@ export default function About() {
                   {instructions.map((item, index) => (
                     <li key={item.id}>
                       {item.id}
-                      {". " + item.name}
+                      {". " + item.text}
                     </li>
                   ))}
                 </ol>
@@ -143,14 +137,6 @@ export default function About() {
               ←
             </button>
             <p>Back</p>
-          </div>
-          <div className="nav-button">
-            <button
-              className="circle-button"
-              onClick={() => console.log("Next clicked")}>
-              →
-            </button>
-            <p>Next</p>
           </div>
         </div>
       </div>
