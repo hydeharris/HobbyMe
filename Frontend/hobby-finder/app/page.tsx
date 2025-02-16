@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import ActivityCard from '../components/ActivityCard';
+import ActivityCard from "../components/ActivityCard";
 
 export default function About() {
   return (
@@ -18,14 +18,15 @@ export default function About() {
         <h2 className="subheader">Welcome.</h2>
         <div className="navigation-buttons">
           <div className="nav-button">
-            <button className="square-button" onClick={() => console.log("Back clicked")}>
+            <button
+              className="square-button"
+              onClick={() => console.log("Back clicked")}>
               Get Started
             </button>
           </div>
         </div>
       </div>
       <style jsx>{`
-        
         .content {
           position: relative;
           z-index: 1;
@@ -65,34 +66,34 @@ export default function About() {
           width: 200px; /* Set a fixed width */
           margin: 20px auto; /* Center the container using margin auto */
         }
-          .nav-button {
+        .nav-button {
           display: flex;
           flex-direction: column;
           align-items: center;
-          margin: 0 10px; 
-          }
-          .square-button {
-            width: 150px;
-            height: 50px;
-            border-radius: 5% / 15%;
-            border: none;
-            background-color: white;
-            color: black;
-            font-size: 1.5rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-          }
-          .square-button:hover {
-            background-color: #f0f0f0;
-          }
-          .nav-button p {
-            margin-top: 5px;
-            color: white;
-            font-size: 1rem;
-          }
+          margin: 0 10px;
+        }
+        .square-button {
+          width: 150px;
+          height: 50px;
+          border-radius: 5% / 15%;
+          border: none;
+          background-color: white;
+          color: black;
+          font-size: 1.5rem;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        .square-button:hover {
+          background-color: #f0f0f0;
+        }
+        .nav-button p {
+          margin-top: 5px;
+          color: white;
+          font-size: 1rem;
+        }
       `}</style>
     </div>
   );
