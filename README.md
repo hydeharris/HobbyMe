@@ -83,4 +83,10 @@ the hobby and what the hobby requires.
 4. Install required packages according to requirements.txt while the environment is active. \
     ``pip install -r requirements.txt``
 5. Deactivate the virtual environment when done. \
-    ``deactivate``     
+    ``deactivate``
+
+## Project Execution
+1. Create the dev build for the React project while in ``Frontend/hobby-finder``
+   ``npm run dev``
+2. Run the Python flask server while in ``Backend``
+   ``python -u [path-to-backend]/sever.py``
