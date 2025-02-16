@@ -8,21 +8,12 @@ load_dotenv()
 # Access the API key
 openai.api_key = os.getenv("OPENAI_API_KEY")
 
-# Example usage
-prompt = "Hello, how are you?"
-response = openai.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": prompt}],
-    max_tokens=150
-)
-print(response.choices[0].message.content)
-
 class Suggester:
     def __init__(self, hobbies, responses, user, questions):
-        self.hobbies = hobbies
-        self.responses = responses
-        self.user = user
-        self.questions = questions
+        self.hobbies = [] # list of Hobby objects
+        self.responses = responses # Responses object
+        self.user = user # User's name
+        self.questions = questions # Questions object
 
     def suggest(self):
         # This is where the magic happens
@@ -30,7 +21,7 @@ class Suggester:
         prompt = "I have answered the following questions regarding what my interests are: " # This is a placeholder prompt
         for question in self.questions.questions:
             prompt += question + " "
-        prompt += "Based on my responses, what hobbies would you suggest for me? "
+        prompt += "Based on my responses, what hobbies would you suggest for me? Answer in the following format: (Name of Hobby): (Description of Hobby), etc..."
         i = 0
         for response in self.responses.responses:
             prompt += str(i) + " " + response + " "
@@ -39,9 +30,19 @@ class Suggester:
         response = openai.chat.completions.create(
             model="gpt-3.5-turbo",
             messages=[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": prompt}],
-            max_tokens=150
+            max_tokens=1000
         )
         print(response.choices[0].message.content)
+        # print(response.choices[0].message.content.split("\n"))
+
+       # Parse the response and add the suggested hobbies to the user's list of hobbies 
+        paragraph = response.choices[0].message.content.split("\n")
+        for hobby in paragraph:
+            if  hobby != "" and hobby[1] == '.':
+                name = hobby.split(":")[0]
+                name = name[3:] # Remove the number and the space
+                description = hobby.split(":")[1]
+                self.hobbies.append(Hobby(name.strip(), description.strip())) 
     
     def add_hobby(self, hobby):
         self.hobbies.append(hobby)
@@ -62,7 +63,7 @@ class Responses:
             self.responses = responses
 
     def add_response(self, response):
-        self.responses.append(response)
+        self.responses.append(response) # Add a response to the list
 
     def remove_response(self, response):
         self.responses.remove(response)
@@ -95,3 +96,6 @@ for question in suggester.questions.questions:
 
 # Suggest hobbies using ChatGPT
 suggester.suggest()
+# Print the suggested hobbies
+for hobby in suggester.hobbies:
+    print(hobby.name + ": " + hobby.description)
