@@ -1,36 +1,42 @@
 "use client";
 
 import Image from "next/image";
-import ActivityCard from '../../components/ActivityCard';
+import ActivityCard from "../../components/ActivityCard";
+import { activities } from "../data/activityData";
 
-export default function About() { 
-  const activitiesList = [  
-  {
-    imageSrc: "/pineTrees.jpg", 
-    activityName: "Hiking",
-    tags: ["Outdoor", "Exercise", "Nature", "Adventure"]
-  },
-  {
-    imageSrc: "/pineTrees.jpg", 
-    activityName: "Weekend Hiking",
-    tags: ["Outdoor", "Exercise", "Nature", "Weekend"]
-  },
-  {
-    imageSrc: "/pineTrees.jpg", 
-    activityName: "Weekend Hiking",
-    tags: ["Outdoor", "Exercise", "Nature", "Weekend"]
-  },
-  {
-    imageSrc: "/pineTrees.jpg", 
-    activityName: "Weekend Hiking",
-    tags: ["Outdoor", "Exercise", "Nature", "Weekend"]
-  },
-  {
-    imageSrc: "/pineTrees.jpg", 
-    activityName: "Weekend Hiking",
-    tags: ["Outdoor", "Exercise", "Nature", "Weekend"]
-  }
-];
+export default function About() {
+  const activitiesList = [
+    {
+      imageSrc: "/hiking.jpg",
+      activityName: "Hiking",
+      tags: ["Outdoor", "Exercise", "Nature", "Adventure"],
+    },
+    {
+      imageSrc: "/pineTrees.jpg",
+      activityName: "Cycling",
+      tags: ["Outdoor", "Exercise", "Competitive", "Endurance"],
+    },
+    {
+      imageSrc: "/pineTrees.jpg",
+      activityName: "Running",
+      tags: ["Outdoor", "Exercise", "Indoor", "Endurance"],
+    },
+    {
+      imageSrc: "/pineTrees.jpg",
+      activityName: "Dancing",
+      tags: ["Expressive", "Exercise", "Indoor", "Wellness"],
+    },
+    {
+      imageSrc: "/pineTrees.jpg",
+      activityName: "Swimming",
+      tags: ["Outdoor", "Exercise", "Indoor", "Wellness"],
+    },
+    {
+      imageSrc: "/pineTrees.jpg",
+      activityName: "Reading",
+      tags: ["Indoor", "Learning", "Academic", "Relaxing"],
+    },
+  ];
 
   return (
     <div className="background">
@@ -42,10 +48,12 @@ export default function About() {
         className="blur"
       />
       <div className="content">
-      <h1 className="header">We found some hobbies that <br></br> might interest you...</h1>
-      <h2 className="subheader">Select up to 3:</h2>
+        <h1 className="header">
+          We found some hobbies that <br></br> might interest you...
+        </h1>
+        <h2 className="subheader">Select up to 3:</h2>
         <div className="scrollable-list">
-           {activitiesList.map((activity, index) => (
+          {activities.map((activity, index) => (
             <ActivityCard
               key={index}
               imageSrc={activity.imageSrc}
@@ -56,13 +64,17 @@ export default function About() {
         </div>
         <div className="navigation-buttons">
           <div className="nav-button">
-            <button className="circle-button" onClick={() => console.log("Back clicked")}>
+            <button
+              className="circle-button"
+              onClick={() => console.log("Back clicked")}>
               ←
             </button>
             <p>Back</p>
           </div>
           <div className="nav-button">
-            <button className="circle-button" onClick={() => console.log("Next clicked")}>
+            <button
+              className="circle-button"
+              onClick={() => console.log("Next clicked")}>
               →
             </button>
             <p>Next</p>

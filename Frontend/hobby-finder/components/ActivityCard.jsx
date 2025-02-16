@@ -32,4 +32,16 @@ const ActivityCard = ({ imageSrc, activityName, tags }) => {
   );
 };
 
+export const infoCards = [
+  {
+    name: "Bob",
+    photo: "/images/bob.jpg",
+    description: "Bob is a friendly guy who loves hiking."
+  },
+  {
+    name: "Alice",
+    photo: "/images/alice.jpg",
+    description: "Alice enjoys painting and reading books."
+  }
+];
 export default ActivityCard;
