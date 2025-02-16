@@ -1,8 +1,17 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 
 const ActivityCard = ({ imageSrc, activityName, tags }) => {
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/HobbyDetails?activity=${activityName}`);
+  };
+
   return (
-    <div className="w-64 rounded-xl overflow-hidden bg-white shadow-lg">  
+    <div className="w-64 rounded-xl overflow-hidden bg-white shadow-lg"
+    onClick={handleClick}
+    >  
       {/* Landscape image - reduced height */}
       <div className="w-full h-40">
         <img 

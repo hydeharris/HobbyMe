@@ -3,12 +3,17 @@
 import Image from "next/image";
 import { useState } from "react";
 import { activities } from "../data/activityData";
+import { useSearchParams } from "next/navigation";
 
 export default function About() {
-  const targetActivity = ["Cooking"];
+  const searchParams = useSearchParams();
+  const activityParam = searchParams.get("activity");
+
+  const targetActivity = activityParam ? [activityParam] : ["Cooking"]; // Default to "Cooking" if no parameter
   const activitesMatch = activities.filter((activity) =>
     targetActivity.includes(activity.activityName)
   );
+
   const activityProfile = activitesMatch[0];
   const instructions = activityProfile.steps;
 
@@ -67,13 +72,13 @@ export default function About() {
         <div className="hobby-background">
           <div className="w-full h-40">
             <img
-              src={"/hiking.jpg"}
+              src={`/${activityProfile.imageSrc}`}
               alt={"Hiking"}
               className="w-full h-full object-cover"
             />
           </div>
           <div className="hobby-brief">Hobby Info:</div>
-          <div className="hobby-name">Hiking</div>
+          <div className="hobby-name">{activityProfile.activityName}</div>
           <div className="hobby-info">
             <div className="hobby-info-subgroup-left">
               <div className="hobby-info-header">About:</div>

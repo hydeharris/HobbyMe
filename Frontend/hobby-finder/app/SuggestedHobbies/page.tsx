@@ -3,13 +3,21 @@
 import Image from "next/image";
 import ActivityCard from "../../components/ActivityCard";
 import { activities } from "../data/activityData";
+import { useState, useEffect } from "react";
 
 export default function About() {
-  const selectedActivities = ["Hiking", "Cooking"];
+  const [selectedItems, setSelectedItems] = useState<string[]>([]);
 
   const filteredActivities = activities.filter((activity) =>
-    selectedActivities.includes(activity.activityName)
+    activity.tags.some((tag) => selectedItems.includes(tag))
   );
+
+  useEffect(() => {
+    const storedItems = localStorage.getItem("selectedItems");
+    if (storedItems) {
+      setSelectedItems(JSON.parse(storedItems));
+    }
+  }, []);
 
   return (
     <div className="background">

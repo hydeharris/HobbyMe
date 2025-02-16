@@ -1,42 +1,12 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function About() {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const [response, setResponse] = useState("");
-  const [loading, setLoading] = useState(false);
-
-  const handleSendData = async () => {
-    try {
-      setLoading(true);
-      console.log(JSON.stringify({ data: selectedItems }));
-      // Assuming Flask server is running on port 5000
-      const response = await fetch("http://localhost:8000/process-array", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: selectedItems }),
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-
-      const result = await response.json();
-      setResponse(result.message);
-    } catch (error) {
-      console.error("Error sending data:", error);
-      // Handle error properly regardless of its type
-      const errorMessage =
-        error instanceof Error ? error.message : String(error);
-      setResponse(`Error: ${errorMessage}`);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const router = useRouter(); // ✅ Use Next.js router
 
   const items: string[] = [
     "Books",
@@ -61,11 +31,25 @@ export default function About() {
     "Movies",
   ];
 
+  const handleNext = () => {
+    router.push("/SuggestedHobbies"); // ✅ Use Next.js navigation
+  };
+
+  useEffect(() => {
+    const storedItems = localStorage.getItem("selectedItems");
+    if (storedItems) {
+      setSelectedItems(JSON.parse(storedItems));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("selectedItems", JSON.stringify(selectedItems));
+  }, [selectedItems]);
+
   const toggleItem = (item: string) => {
     setSelectedItems((prev) =>
       prev.includes(item) ? prev.filter((i) => i !== item) : [...prev, item]
     );
-    console.log(selectedItems.toString());
   };
 
   return (
@@ -84,7 +68,6 @@ export default function About() {
           {items.map((item) => (
             <div key={item} className="list-item">
               <label htmlFor={item}>{item}</label>
-
               <input
                 type="checkbox"
                 id={item}
@@ -96,7 +79,7 @@ export default function About() {
         </div>
         <div className="navigation-buttons">
           <div className="nav-button">
-            <button className="circle-button" onClick={() => handleSendData()}>
+            <button className="circle-button" onClick={handleNext}>
               →
             </button>
             <p>Next</p>
@@ -141,11 +124,11 @@ export default function About() {
         }
         .navigation-buttons {
           display: flex;
-          justify-content: space-between; /* Changed from center */
+          justify-content: space-between;
           align-items: center;
           flex-direction: row;
-          width: 200px; /* Set a fixed width */
-          margin: 20px auto; /* Center the container using margin auto */
+          width: 200px;
+          margin: 20px auto;
         }
       `}</style>
     </div>
