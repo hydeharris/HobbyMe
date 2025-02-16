@@ -13,14 +13,15 @@ the hobby and what the hobby requires.
 3. To ensure it is properly downloaded, launch cmd prompt and type in "python --version". It should show that you have it downloaded by showing the current version installed.
 
 ### React - 19.0
-1. Got to [https://react.dev/learn/installation](url)
+1. Got to [https://react.dev/learn/installation](https://react.dev/learn/installation)
 
 ### Git - 2.43.0.windows.1 | 2.48.1 (MacOS)
-1. Go to [https://git-scm.com/downloads](url) and download the correct version for your device.
+1. Go to [https://git-scm.com/downloads]([url](https://git-scm.com/downloads)) and download the correct version for your device.
 2. Once downloaded, open the file and follow the pop-up instructions.
 3. To ensure it is properly downloaded, launch cmd prompt and type in "git --version". It should show that you have it downloaded by showing the current version installed.
 
 ### NextJS - 15.1.7
+1. Go to [https://nextjs.org](https://nextjs.org)
 
 ### Packages
 **OpenAI:** 1.63.0
