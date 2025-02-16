@@ -13,8 +13,7 @@ the hobby and what the hobby requires.
 3. To ensure it is properly downloaded, launch cmd prompt and type in "python --version". It should show that you have it downloaded by showing the current version installed.
 
 ### React - 19.0
-1. Got to [https://www.swift.org/install/linux/](url) and download the correct version for your device.
-2. Once downloaded, open the file and follow the pop-up instructions.
+1. Got to [https://react.dev/learn/installation](url)
 
 ### Git - 2.43.0.windows.1 | 2.48.1 (MacOS)
 1. Go to [https://git-scm.com/downloads](url) and download the correct version for your device.
@@ -39,7 +38,3 @@ the hobby and what the hobby requires.
     ``pip install -r requirements.txt``
 5. Deactivate the virtual environment when done. \
     ``deactivate``     
-   
-## Usage Guide
-
-## Configuration
