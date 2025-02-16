@@ -27,7 +27,7 @@ class Suggester:
         response = openai.chat.completions.create(      # Get the response from the model
             model="gpt-3.5-turbo",
             messages=[{"role": "system", "content": "You are a helpful assistant."}, {"role": "user", "content": prompt}],
-            max_tokens=1000
+            max_tokens=500
         )
         print(response.choices[0].message.content) # Print the response from the model
 
@@ -39,12 +39,23 @@ class Suggester:
                 name = name[3:] # Remove the number and the space
                 description = hobby.split(":")[1]
                 self.hobbies.append(Hobby(name.strip(), description.strip()))   # Add the hobby to the list of hobbies
+
+    def generate_response(self, prompt):
+        response = openai.chat.completions.create(
+             model="gpt-3.5-turbo",
+            messages=[{"role": "system", "content": "You are a helpful assistant. Be consise with your answers"}, {"role": "user", "content": prompt}],
+            max_tokens=500
+        )
+        return response.choices[0].message.content
     
     def add_hobby(self, hobby):
         self.hobbies.append(hobby)
 
     def remove_hobby(self, hobby):
         self.hobbies.remove(hobby)
+
+    def get_response(self, text):
+        self.responsesList.add_response(text)
     
 class Hobby:
     def __init__(self, name, description):
@@ -64,6 +75,9 @@ class Responses:
     def remove_response(self, response):
         self.responses.remove(response)
 
+    def get_response(self, index):
+        return self.responses[index]
+
 class Questions:
     def __init__(self, questions=None):
         if questions is None:
@@ -77,21 +91,28 @@ class Questions:
     def remove_question(self, question):
         self.questions.remove(question)
 
-# Example usage
+# Example usage of the Suggester class
 name = input("Enter your name: ")
 suggester = Suggester([], Responses(), name, Questions())   # Create a Suggester object
 
 # Add questions
-for i in range(2):
-    suggester.questionsList.add_question(input("Enter a question: ")) # Add a question
+suggester.questionsList.add_question("What are you interested in?")
+suggester.questionsList.add_question("How much free time do you have in hours?")
+suggester.questionsList.add_question("How fit are you on a scale of 1 to 5?")
 
 # Answer questions
 for question in suggester.questionsList.questions:
     print(question)
     suggester.responsesList.add_response(input("Enter your response: ")) # Add a response
 
+# Generate response using ChatGPT
+prompt = f"Given that the user is interested in " + suggester.responsesList.get_response(0) + ", has " + suggester.responsesList.get_response(1) + "hours of freetime in a day, and rates themselves as a " + suggester.responsesList.get_response(2) + " on a scale of 1-5 of fitness, explain why Chess would be a good or bad fit for them."
+response = suggester.generate_response(prompt)
+print(response)
+'''
 # Suggest hobbies using ChatGPT
 suggester.suggest()
 # Print the suggested hobbies
 for hobby in suggester.hobbies:
     print(hobby.name + ": " + hobby.description)
+    '''
