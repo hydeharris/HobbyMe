@@ -8,7 +8,7 @@ the hobby and what the hobby requires.
 
 ## Prerequisite Installations
 ### Python3 - 3.13.1
-1. Go to [https://www.python.org](url) and download the correct version for your device.
+1. Go to [https://www.python.org](https://www.python.org) and download the correct version for your device.
 2. Once downloaded, open the file and follow the pop-up instructions.
 3. To ensure it is properly downloaded, launch cmd prompt and type in "python --version". It should show that you have it downloaded by showing the current version installed.
 
