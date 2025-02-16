@@ -1,35 +1,160 @@
+import os 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+import openai
+from dotenv import load_dotenv
+
+load_dotenv()
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
 
 app = Flask(__name__)
 # Enable CORS for all routes with specific origins
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
 
 userInterests = []
+userFitness = 1
+userFreetime = 0
 
-@app.route('/process-array', methods=['POST', 'OPTIONS'])
-def process_array():
+@app.route('/store-fitness', methods=['POST', 'OPTIONS'])
+def store_profile():
+    global userFitness, userFreetime
+
     # Handle preflight OPTIONS request
     if request.method == 'OPTIONS':
         return '', 204
     
     try:
-        # Get the JSON data sent from React
         data = request.json
-        print(request.json)
-        # Extract the array
-        array_data = data.get('data', [])
-        userInterests = array_data
-        # Do something with the array (example: calculate sum)
+
+        free_time = data.get('freeTime', 0)
+        exertion = data.get('exertion', 0)
+
+        userFitness = exertion
+        userFreetime = free_time
         
-        
-        # Return a response
         return jsonify({
             'status': 'success',
-            'message': f'Received array with {len(array_data)} elements. Sum: {0}',
-            'processed_data': array_data
         })
     
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+    
+@app.route('/store-interests', methods=['POST', 'OPTIONS'])
+def store_interests():
+    global userInterests
+
+    # Handle preflight OPTIONS request
+    if request.method == 'OPTIONS':
+        return '', 204
+    
+    try:
+        data = request.json
+
+        interests = data.get('interests', [])
+        userInterests.extend(interests)
+        
+        return jsonify({
+            'status': 'success',
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+    
+@app.route('/reset-data', methods=['POST', 'OPTIONS'])
+def reset_data():
+    global userInterests, userFitness, userFreetime
+
+    # Handle preflight OPTIONS request
+    if request.method == 'OPTIONS':
+        return '', 204
+    
+    try:
+        userInterests = []
+        userFitness = 1
+        userFreetime = 0
+        
+        return jsonify({
+            'status': 'success',
+        })
+    
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+    
+#from suggester import Suggester, Responses, Questions
+
+@app.route('/chat', methods=['POST', 'OPTIONS'])
+def chat():
+    if request.method == 'OPTIONS':
+        return '', 204
+    
+    try:
+        data = request.json
+        user_message = data.get('message', '')
+        activity = data.get('activity', '')
+        
+        # Use OpenAI to generate a chat response about the activity
+        response = openai.chat.completions.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "system", "content": f"You are an expert assistant for {activity}. Be concise and helpful."},
+                {"role": "user", "content": user_message}
+            ],
+            max_tokens=150
+        )
+        
+        bot_response = response.choices[0].message.content
+        
+        return jsonify({
+            'status': 'success',
+            'message': bot_response
+        })
+        
+    except Exception as e:
+        return jsonify({
+            'status': 'error',
+            'message': str(e)
+        }), 500
+    
+@app.route('/fit-description', methods=['POST', 'OPTIONS'])
+def get_fit_description():
+    global userInterests, userFitness, userFreetime
+
+    if request.method == 'OPTIONS':
+        return '', 204
+    
+    try:
+        data = request.json
+        activity = data.get('activity', '')
+        user_interests = data.get('interests', [])
+        
+        # Use OpenAI to generate a personalized fit description
+        prompt = f"Given that the user is interested in {', '.join(userInterests)}, has {userFreetime} hours of freetime in a day, and rates themselves as a {userFitness} on a scale of 1-50 of fitness, explain why {activity} would be a good or bad fit for them."
+       #response = openai.chat.completions.create(
+       #    model="gpt-3.5-turbo",
+       #    messages=[
+       #        {"role": "user", "content": prompt}
+       #    ],
+       #    max_tokens=100
+       #)
+        
+        fit_description = "We think it fits bad for you!"
+        #response.choices[0].message.content 
+        
+        return jsonify({
+            'status': 'success',
+            'fitDescription': fit_description
+        })
+        
     except Exception as e:
         return jsonify({
             'status': 'error',

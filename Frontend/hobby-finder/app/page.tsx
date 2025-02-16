@@ -1,9 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import ActivityCard from "../components/ActivityCard";
+import { useRouter } from "next/navigation";
 
 export default function About() {
+  const router = useRouter();
+
+  const handleNext = () => {
+    router.push("/AmountQuestion");
+  };
+
   return (
     <div className="background">
       <Image
@@ -18,9 +24,7 @@ export default function About() {
         <h2 className="subheader">Welcome.</h2>
         <div className="navigation-buttons">
           <div className="nav-button">
-            <button
-              className="square-button"
-              onClick={() => console.log("Back clicked")}>
+            <button className="square-button" onClick={handleNext}>
               Get Started
             </button>
           </div>

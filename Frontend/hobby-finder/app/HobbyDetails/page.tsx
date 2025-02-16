@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useState, useEffect } from "react"; // Add useEffect import
 import { activities } from "../data/activityData";
 import { useSearchParams } from "next/navigation";
 
@@ -16,7 +16,9 @@ export default function About() {
 
   const activityProfile = activitesMatch[0];
   const instructions = activityProfile.steps;
-
+  const [fitDescription, setFitDescription] = useState(
+    activityProfile.description
+  );
   interface ChatMessage {
     id: number;
     text: string;
@@ -27,7 +29,7 @@ export default function About() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     {
       id: 1,
-      text: "Hi! I'm your hiking assistant. What would you like to know?",
+      text: "Hi! I'm your hobby helper. What would you like to know?",
       sender: "bot",
       timestamp: new Date(),
     },
@@ -35,7 +37,7 @@ export default function About() {
   const [inputMessage, setInputMessage] = useState("");
 
   // Add this function to handle sending messages
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (inputMessage.trim()) {
       const newMessage: ChatMessage = {
         id: messages.length + 1,
@@ -46,18 +48,82 @@ export default function About() {
       setMessages([...messages, newMessage]);
       setInputMessage("");
 
-      // Simulate bot response
-      setTimeout(() => {
-        const botResponse: ChatMessage = {
-          id: messages.length + 2,
-          text: "I'm here to help with your hiking questions! Feel free to ask anything.",
-          sender: "bot",
-          timestamp: new Date(),
-        };
-        setMessages((prev) => [...prev, botResponse]);
-      }, 1000);
+      try {
+        // Send message to chat endpoint
+        const response = await fetch("http://localhost:8000/chat", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            message: inputMessage,
+            activity: activityProfile.activityName,
+          }),
+        });
+
+        const data = await response.json();
+
+        if (data.status === "success") {
+          const botResponse: ChatMessage = {
+            id: messages.length + 2,
+            text: data.message,
+            sender: "bot",
+            timestamp: new Date(),
+          };
+          setMessages((prev) => [...prev, botResponse]);
+        }
+      } catch (error) {
+        console.error("Error sending message:", error);
+      }
     }
   };
+
+  const [isLoadingFit, setIsLoadingFit] = useState(false);
+
+  const getFitDescription = async () => {
+    setIsLoadingFit(true);
+    try {
+      const response = await fetch("http://localhost:8000/fit-description", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          activity: activityProfile.activityName,
+          interests: ["None"] || ["None"], // Provide a default value
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.status === "success") {
+        setFitDescription(data.fitDescription);
+      } else {
+        console.error("Failed to get fit description:", data.message);
+        setFitDescription(
+          "We're currently analyzing how this activity fits your interests."
+        );
+      }
+    } catch (error) {
+      console.error("Error getting fit description:", error);
+      setFitDescription(
+        "Unable to analyze fit at the moment. Please try again later."
+      );
+    } finally {
+      setIsLoadingFit(false);
+    }
+  };
+
+  // Fix useEffect dependencies
+  useEffect(() => {
+    if (activityProfile?.activityName) {
+      getFitDescription();
+    }
+  }, [activityProfile?.activityName]); // Now properly references activityProfile
 
   return (
     <div className="background">
@@ -98,6 +164,13 @@ export default function About() {
             </div>
 
             <div className="hobby-info-subgroup-right">
+              <div className="hobby-info-header">
+                How we think it fits for you:
+              </div>
+              <div className="bodyText">
+                {isLoadingFit ? <span>Analyzing fit...</span> : fitDescription}
+              </div>
+
               <div className="hobby-info-header">Get Help:</div>
               <div className="chat-box">
                 <div className="messages-container">

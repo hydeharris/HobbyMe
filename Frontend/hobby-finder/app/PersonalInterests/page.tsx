@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 
 export default function About() {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
-  const router = useRouter(); // ✅ Use Next.js router
+  const router = useRouter(); 
 
   const items: string[] = [
     "Books",
@@ -32,7 +32,7 @@ export default function About() {
   ];
 
   const handleNext = () => {
-    router.push("/SuggestedHobbies"); // ✅ Use Next.js navigation
+    router.push("/SuggestedHobbies"); 
   };
 
   useEffect(() => {

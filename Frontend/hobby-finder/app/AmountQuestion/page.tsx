@@ -2,10 +2,43 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 export default function FreeTimeQuestion() {
   const [freeTime, setFreeTime] = useState(3);
   const [exertion, setExertion] = useState(50);
+
+  const router = useRouter();
+
+  const handleSubmitValues = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/store-fitness", {
+        // Send message to chat endpoint
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          freeTime: freeTime,
+          exertion: exertion,
+        }),
+      });
+      const data = await response.json();
+
+      if (data.status === "success") {
+        console.log("Values stored successfully");
+        // You can proceed to next page here if needed
+        router.push("/PersonalInterests");
+      }
+    } catch (error) {
+      console.error("Error sending values:", error);
+    }
+  };
+
+  const handleNext = async () => {
+    await handleSubmitValues();
+    router.push("/PersonalInterests");
+  };
 
   return (
     <div className="background">
@@ -20,10 +53,10 @@ export default function FreeTimeQuestion() {
         <div className="question">
           <h1 className="subheader">How much free time do you have?</h1>
           <div className="slider-container">
-              <div className="slider-labels">
-                <span className="left-label">less</span>
-                <span className="right-label">more</span>
-              </div>
+            <div className="slider-labels">
+              <span className="left-label">less</span>
+              <span className="right-label">more</span>
+            </div>
             <input
               type="range"
               min="1"
@@ -42,10 +75,10 @@ export default function FreeTimeQuestion() {
             How much excertion would you be willing to endure?
           </h1>
           <div className="slider-container">
-          <div className="slider-labels">
-                <span className="left-label">less</span>
-                <span className="right-label">more</span>
-          </div>
+            <div className="slider-labels">
+              <span className="left-label">less</span>
+              <span className="right-label">more</span>
+            </div>
             <input
               type="range"
               min="0"
@@ -62,19 +95,7 @@ export default function FreeTimeQuestion() {
 
         <div className="navigation-buttons">
           <div className="nav-button">
-            <button
-              className="circle-button"
-              onClick={() => console.log("Back clicked")}
-            >
-              ←
-            </button>
-            <p>Back</p>
-          </div>
-          <div className="nav-button">
-            <button
-              className="circle-button"
-              onClick={() => console.log("Next clicked")}
-            >
+            <button className="circle-button" onClick={handleNext}>
               →
             </button>
             <p>Next</p>

@@ -108,5 +108,131 @@ export interface Activity {
         { id: 5, text: "Find a writing community: Connect with other writers online or in person. Sharing your work and getting feedback can be a valuable part of the writing process." }
       ]
     },
+    {
+      imageSrc: "reading.jpg",
+      activityName: "Reading",
+      tags: ["Books", "Learning", "Relaxing", "Exploring"],
+      description: "Reading is a captivating journey that transports you to different worlds, times, and perspectives. Whether you enjoy fiction, non-fiction, poetry, or graphic novels, books offer endless opportunities for entertainment, education, and personal growth. Reading improves vocabulary, enhances empathy, reduces stress, and stimulates your imagination. It can be a solitary activity for quiet reflection or a social experience through book clubs and literary discussions. From cozy mysteries to thought-provoking philosophy, there's a genre for every mood and interest.",
+      steps: [
+        { id: 1, text: "Find your reading style: Experiment with different genres to discover what captures your interest. Don't feel obligated to finish books you're not enjoying - it's okay to move on to something that resonates better with you." },
+        { id: 2, text: "Create a reading space: Designate a comfortable spot with good lighting for reading. This could be a cozy corner with pillows, a dedicated reading chair, or even a hammock in your yard." },
+        { id: 3, text: "Join a book club: Local libraries, bookstores, or online communities often host book clubs. This is a great way to discover new titles and discuss your thoughts with others." },
+        { id: 4, text: "Use technology: Try e-readers or audiobooks if traditional reading is challenging. Many libraries offer free digital borrowing services." },
+        { id: 5, text: "Set realistic goals: Start with small, achievable reading goals, like 20 minutes per day or one book per month." },
+        { id: 6, text: "Track your reading: Keep a journal or use an app to record books you've read, want to read, and your thoughts about them." }
+      ]
+    },
+    {
+      imageSrc: "boardgames.jpg",
+      activityName: "Board Gaming",
+      tags: ["Games", "Strategy", "Socializing", "Competitions"],
+      description: "Board gaming is a dynamic hobby that combines strategic thinking, social interaction, and friendly competition. From classic family games to complex strategy titles, the modern board game renaissance offers something for everyone. Playing board games helps develop critical thinking, planning skills, and the ability to adapt to changing circumstances. It's also a fantastic way to connect with friends and family in an engaging, screen-free environment. Whether you're solving mysteries, building civilizations, or racing to victory, board games create memorable experiences and lasting connections.",
+      steps: [
+        { id: 1, text: "Start with gateway games: Begin with accessible games like Ticket to Ride, Catan, or Pandemic that are easy to learn but offer depth of play." },
+        { id: 2, text: "Visit a board game café: Many cities have cafés with libraries of games and staff who can teach you how to play. This is a low-investment way to try different games." },
+        { id: 3, text: "Find your gaming group: Invite friends for a game night or look for local gaming meetups. Having regular gaming partners enhances the experience." },
+        { id: 4, text: "Learn from videos: Watch tutorial videos online before playing a new game. This can make learning rules much easier." },
+        { id: 5, text: "Expand your collection thoughtfully: Rather than buying many games at once, select a few that your group enjoys and play them thoroughly before adding more." },
+        { id: 6, text: "Organize regular game nights: Set up a consistent schedule for gaming sessions to make it a regular part of your social calendar." }
+      ]
+    },
+    {
+      imageSrc: "travel.jpg",
+      activityName: "Travel Planning",
+      tags: ["Travels", "Exploring", "Learning", "Adventuring"],
+      description: "Travel planning is an exciting activity that combines research, organization, and anticipation. Whether you're mapping out a weekend getaway or a round-the-world adventure, the process of planning a trip can be almost as rewarding as the journey itself. Travel planning involves discovering new destinations, learning about different cultures, creating itineraries, and finding the best experiences within your budget. It's a skill that improves with each trip, helping you become more confident and resourceful. The research phase expands your knowledge of geography, history, and global cultures, while the actual planning develops your organizational abilities.",
+      steps: [
+        { id: 1, text: "Create a travel bucket list: Start by brainstorming destinations you've always wanted to visit. Consider different types of experiences - urban explorations, nature adventures, cultural immersions, etc." },
+        { id: 2, text: "Research one destination at a time: Once you've selected a destination, dive deep into research about its attractions, culture, cuisine, local customs, and practical matters like weather and transportation." },
+        { id: 3, text: "Build a flexible itinerary: Plan your major activities while leaving room for spontaneity. Create a day-by-day outline that balances sightseeing with relaxation time." },
+        { id: 4, text: "Make a budget: Research costs for accommodations, transportation, food, activities, and souvenirs. Add extra for unexpected expenses." },
+        { id: 5, text: "Organize your documents: Create digital and physical folders for reservations, identification, emergency contacts, and important information." },
+        { id: 6, text: "Learn travel hacking: Study techniques for finding deals on flights, accommodations, and activities to maximize your travel budget." }
+      ]
+    },
+    {
+      imageSrc: "running.jpg",
+      activityName: "Running",
+      tags: ["Sports", "Exercising", "Competitions", "Nature"],
+      description: "Running is a versatile and accessible form of exercise that offers numerous physical and mental health benefits. From casual jogging in your neighborhood to training for marathons, running can be adapted to any fitness level and goal. It improves cardiovascular health, builds endurance, strengthens muscles, and helps maintain a healthy weight. Beyond the physical benefits, running releases endorphins that boost mood, reduce stress, and enhance mental clarity. It can be a solitary activity for personal reflection or a social experience through running clubs and races. Whether you prefer urban streets, forested trails, or track workouts, running connects you with your environment while challenging your limits.",
+      steps: [
+        { id: 1, text: "Get proper footwear: Visit a specialty running store for a gait analysis and recommendations for shoes that fit your running style and foot shape." },
+        { id: 2, text: "Start with a run/walk approach: Begin with intervals of running and walking. Gradually increase the running portions as your fitness improves." },
+        { id: 3, text: "Follow a structured plan: Use a beginner-friendly program like Couch to 5K to build your endurance systematically and avoid injury." },
+        { id: 4, text: "Join a running group: Local running stores or community centers often host group runs for different levels. These provide motivation, safety, and social connection." },
+        { id: 5, text: "Track your progress: Use a running app or simple journal to log your runs. Seeing your improvement over time can be highly motivating." },
+        { id: 6, text: "Sign up for a race: Having a goal event can provide structure to your training. Start with a 5K and progress to longer distances if interested." }
+      ]
+    },
+    {
+      imageSrc: "music.jpg",
+      activityName: "Music Production",
+      tags: ["Music", "Technology", "Creating", "Expressing"],
+      description: "Music production is a creative process that combines technical skills with artistic expression to create original compositions or recordings. With today's technology, anyone with a computer can explore this rewarding activity. Music production encompasses a range of tasks, from composing melodies and writing lyrics to recording instruments, programming beats, mixing tracks, and finalizing a polished sound. It's a continuous learning journey that develops your ear for music, technical abilities, and creative voice. Whether you're creating tracks for personal enjoyment, sharing with friends, or pursuing a career in music, production offers a fulfilling way to channel your musical ideas into tangible creations.",
+      steps: [
+        { id: 1, text: "Start with basic software: Begin with an entry-level Digital Audio Workstation (DAW) like GarageBand, Audacity, or the free version of FL Studio to learn the fundamentals." },
+        { id: 2, text: "Learn music theory basics: Understanding scales, chords, and rhythm will help you create more coherent musical pieces. Many free resources exist online." },
+        { id: 3, text: "Experiment with samples and loops: Most DAWs come with pre-recorded loops and samples that you can arrange to create your first tracks while learning the software." },
+        { id: 4, text: "Practice active listening: Study songs you love, paying attention to their structure, instrumentation, and production techniques. Try to recreate elements you enjoy." },
+        { id: 5, text: "Join online communities: Platforms like Reddit, Discord, and specialized forums have supportive communities of producers who share knowledge and feedback." },
+        { id: 6, text: "Create finished pieces: Rather than accumulating unfinished projects, focus on completing tracks, even if they're simple. The process of finishing teaches valuable skills." }
+      ]
+    },
+    {
+      imageSrc: "photography.jpg",
+      activityName: "Photography",
+      tags: ["Art", "Technology", "Exploring", "Creating"],
+      description: "Photography is a versatile art form that allows you to capture moments, express your unique perspective, and document the world around you. With cameras now accessible on most smartphones, anyone can begin exploring photography without significant investment. As you develop your skills, you'll learn to work with light, composition, timing, and subject matter to create compelling images. Photography encourages mindfulness and observation, helping you notice details and beauty in everyday scenes. It can be practiced anywhere—from your backyard to exotic destinations—and in countless styles, from landscapes and portraits to street photography and abstract art. Whether you're preserving memories or creating artistic expressions, photography offers endless opportunities for growth and creativity.",
+      steps: [
+        { id: 1, text: "Master your equipment: Whether using a smartphone or dedicated camera, learn its basic functions and capabilities. Understand concepts like focus, exposure, and shooting modes." },
+        { id: 2, text: "Study composition: Learn fundamental principles like the rule of thirds, leading lines, framing, and balance to create more appealing images." },
+        { id: 3, text: "Explore different genres: Try various types of photography—landscapes, portraits, macro, street, etc.—to discover what resonates with you." },
+        { id: 4, text: "Practice regularly: Set small projects for yourself, like a photo a day or weekend photo walks. Consistent practice is key to improvement." },
+        { id: 5, text: "Seek constructive feedback: Share your work in online communities or local camera clubs where you can receive helpful critique." },
+        { id: 6, text: "Learn basic editing: Familiarize yourself with simple editing techniques to enhance your images. Free software like GIMP or apps like Snapseed are good starting points." }
+      ]
+    },
+    {
+      imageSrc: "chess.jpg",
+      activityName: "Chess",
+      tags: ["Games", "Strategy", "Competitions", "Learning"],
+      description: "Chess is a timeless strategy game that combines intellectual challenge with competitive spirit. As one of the world's oldest and most respected games, chess offers a perfect balance of accessibility and depth—the rules can be learned in minutes, but mastery takes a lifetime. Playing chess develops critical thinking, problem-solving skills, pattern recognition, and the ability to plan several moves ahead. It also teaches valuable life lessons about decision-making, consequences, and learning from mistakes. Whether played casually with friends, in clubs, in tournaments, or online, chess provides a mental workout that keeps your mind sharp while connecting you with a global community of players from all walks of life.",
+      steps: [
+        { id: 1, text: "Learn the basic rules: Understand how each piece moves and the objective of the game. Many websites and apps offer interactive tutorials for beginners." },
+        { id: 2, text: "Practice with puzzles: Chess puzzles (also called tactics) help you recognize patterns and develop your calculation skills. Start with simple puzzles and progress to more complex ones." },
+        { id: 3, text: "Study fundamental principles: Learn about concepts like controlling the center, developing pieces, king safety, and pawn structure." },
+        { id: 4, text: "Play regularly: Find opponents at your level through online platforms, local chess clubs, or among friends and family." },
+        { id: 5, text: "Analyze your games: Review your completed games to understand your mistakes and identify areas for improvement. Many online chess platforms offer this feature." },
+        { id: 6, text: "Read about chess: Explore books or online resources about strategy, famous games, and chess history to deepen your appreciation and understanding of the game." }
+      ]
+    },
+    {
+      imageSrc: "fashion.jpg",
+      activityName: "Fashion Design",
+      tags: ["Fashion", "Creating", "Expressing", "Art"],
+      description: "Fashion design is a creative discipline that allows you to express your aesthetic vision through clothing and accessories. From sketching concepts and selecting fabrics to construction and final presentation, fashion design is a multifaceted process that combines artistic inspiration with practical considerations. It encourages you to develop your unique style while considering functionality, sustainability, and cultural influences. Whether you're upcycling old garments, creating costumes, or designing everyday wear, fashion design connects you to a rich history of self-expression through clothing. As you develop your skills, you'll gain a deeper appreciation for craftsmanship, materials, and the power of personal style to communicate identity and values.",
+      steps: [
+        { id: 1, text: "Develop your eye: Study fashion magazines, museum collections, runway shows, and street style to understand different aesthetics and how clothing is constructed." },
+        { id: 2, text: "Learn basic sketching: Practice drawing simple garment silhouettes and gradually add details. Fashion sketching has its own conventions that you can learn through online tutorials." },
+        { id: 3, text: "Understand fabrics: Visit fabric stores to touch and examine different materials. Learn about their properties, how they drape, and which are easier for beginners to work with." },
+        { id: 4, text: "Master basic sewing: Take an introductory sewing class or follow online tutorials to learn essential stitches, how to use a pattern, and basic garment construction." },
+        { id: 5, text: "Start with simple projects: Begin with straightforward items like tote bags, pillowcases, or simple skirts before attempting more complex garments." },
+        { id: 6, text: "Create a mood board: Collect images, color swatches, fabric samples, and inspiration that reflect your personal style or a specific design concept you want to explore." }
+      ]
+    },
+    {
+      imageSrc: "cinema.jpg",
+      activityName: "Film Appreciation",
+      tags: ["Movies", "Art", "Learning", "Relaxing"],
+      description: "Film appreciation is the thoughtful study and enjoyment of cinema as an art form and cultural phenomenon. It involves watching movies with a critical eye, understanding different genres and movements, recognizing the techniques of great directors, and analyzing how films reflect and shape society. This hobby enriches your viewing experience by helping you notice details in storytelling, cinematography, acting, sound design, and editing that casual viewers might miss. Film appreciation can be pursued individually through personal viewing and research, or socially through film clubs, festival attendance, and discussions. As you develop this interest, you'll build a mental library of influential works, recognize references and homages in new films, and gain insight into different cultures and historical periods through their cinematic expression.",
+      steps: [
+        { id: 1, text: "Watch essential classics: Begin with widely recognized masterpieces from different eras and countries. Many 'greatest films' lists can provide a starting point." },
+        { id: 2, text: "Learn basic film language: Understand fundamental concepts like mise-en-scène, montage, genre, and narrative structure through books or online resources." },
+        { id: 3, text: "Explore one director or movement: Choose a filmmaker or film movement (like French New Wave or German Expressionism) and watch several representative works." },
+        { id: 4, text: "Keep a film journal: Record your thoughts, observations, and questions about each film you watch. Note elements that stood out to you." },
+        { id: 5, text: "Join or start a film club: Meet regularly with others to watch and discuss selected films, gaining new perspectives beyond your own." },
+        { id: 6, text: "Attend film festivals: Local film festivals offer opportunities to see new and independent works, often with director Q&As and special events." }
+      ]
+    }
   ];
   
