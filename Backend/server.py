@@ -4,6 +4,10 @@ from flask_cors import CORS
 import openai
 from dotenv import load_dotenv
 
+from suggester import Suggester, Responses, Questions
+suggester = Suggester([], Responses(), "user", Questions())  # Create a global instance
+
+
 load_dotenv()
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
@@ -11,6 +15,7 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 app = Flask(__name__)
 # Enable CORS for all routes with specific origins
 CORS(app, resources={r"/*": {"origins": "http://localhost:3000"}})
+
 
 userInterests = []
 userFitness = 1
@@ -135,25 +140,22 @@ def get_fit_description():
     try:
         data = request.json
         activity = data.get('activity', '')
-        user_interests = data.get('interests', [])
         
         # Use OpenAI to generate a personalized fit description
-        prompt = f"Given that the user is interested in {', '.join(userInterests)}, has {userFreetime} hours of freetime in a day, and rates themselves as a {userFitness} on a scale of 1-50 of fitness, explain why {activity} would be a good or bad fit for them."
-       #response = openai.chat.completions.create(
-       #    model="gpt-3.5-turbo",
-       #    messages=[
-       #        {"role": "user", "content": prompt}
-       #    ],
-       #    max_tokens=100
-       #)
+        data = request.json
+        activity = data.get('activity', '')
         
-        fit_description = "We think it fits bad for you!"
-        #response.choices[0].message.content 
+        # Create prompt for fitness description
+        prompt = f"Given that the user is interested in {', '.join(userInterests)}, has {userFreetime} hours of freetime in a day, and rates themselves as a {userFitness} on a scale of 1-50 willingness of fitness, explain why {activity} would be a good or bad fit for them. Address them as 'you'. You can be highly critical as well if you don't think it is a good fit. Only mention their specific stats if needed."
+        
+        # Use suggester's generate_response
+        fit_description = suggester.generate_response(prompt)
         
         return jsonify({
             'status': 'success',
             'fitDescription': fit_description
         })
+    
         
     except Exception as e:
         return jsonify({

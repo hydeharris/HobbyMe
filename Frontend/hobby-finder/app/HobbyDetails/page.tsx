@@ -4,15 +4,39 @@ import Image from "next/image";
 import { useState, useEffect } from "react"; // Add useEffect import
 import { activities } from "../data/activityData";
 import { useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 
 export default function About() {
   const searchParams = useSearchParams();
   const activityParam = searchParams.get("activity");
+  const router = useRouter();
 
   const targetActivity = activityParam ? [activityParam] : ["Cooking"]; // Default to "Cooking" if no parameter
   const activitesMatch = activities.filter((activity) =>
     targetActivity.includes(activity.activityName)
   );
+
+  const sendBack = () => {
+    router.push("/SuggestedHobbies");
+  };
+
+  const restartData = async () => {
+    const response = await fetch("http://localhost:8000/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        message: inputMessage,
+        activity: activityProfile.activityName,
+      }),
+    });
+  };
+  const restart = () => {
+    restartData();
+    localStorage.clear();
+    router.push("/");
+  };
 
   const activityProfile = activitesMatch[0];
   const instructions = activityProfile.steps;
@@ -90,7 +114,6 @@ export default function About() {
         },
         body: JSON.stringify({
           activity: activityProfile.activityName,
-          interests: ["None"] || ["None"], // Provide a default value
         }),
       });
 
@@ -209,12 +232,16 @@ export default function About() {
         </div>
         <div className="navigation-buttons">
           <div className="nav-button">
-            <button
-              className="circle-button"
-              onClick={() => console.log("Back clicked")}>
+            <button className="circle-button" onClick={sendBack}>
               ←
             </button>
             <p>Back</p>
+          </div>
+          <div className="nav-button">
+            <button className="circle-button" onClick={restart}>
+              ↺
+            </button>
+            <p>Start Over</p>
           </div>
         </div>
       </div>
@@ -350,12 +377,14 @@ export default function About() {
           background-color: #007aff;
           color: white;
           border-bottom-right-radius: 4px;
+          text-align: left;
         }
 
         .message.bot .message-bubble {
           background-color: #e9ecef;
           color: black;
           border-bottom-left-radius: 4px;
+          text-align: left;
         }
 
         .timestamp {

@@ -92,23 +92,7 @@ class Questions:
         self.questions.remove(question)
 
 # Example usage of the Suggester class
-name = input("Enter your name: ")
-suggester = Suggester([], Responses(), name, Questions())   # Create a Suggester object
 
-# Add questions
-suggester.questionsList.add_question("What are you interested in?")
-suggester.questionsList.add_question("How much free time do you have in hours?")
-suggester.questionsList.add_question("How fit are you on a scale of 1 to 5?")
-
-# Answer questions
-for question in suggester.questionsList.questions:
-    print(question)
-    suggester.responsesList.add_response(input("Enter your response: ")) # Add a response
-
-# Generate response using ChatGPT
-prompt = f"Given that the user is interested in " + suggester.responsesList.get_response(0) + ", has " + suggester.responsesList.get_response(1) + "hours of freetime in a day, and rates themselves as a " + suggester.responsesList.get_response(2) + " on a scale of 1-5 of fitness, explain why Chess would be a good or bad fit for them."
-response = suggester.generate_response(prompt)
-print(response)
 '''
 # Suggest hobbies using ChatGPT
 suggester.suggest()
