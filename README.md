@@ -24,6 +24,7 @@ the hobby and what the hobby requires.
 
 ### Packages
 **OpenAI:** 1.63.0
+
 **Python-dotenv** 1.01
 
 ## Project Installation
