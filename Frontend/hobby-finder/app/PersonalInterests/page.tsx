@@ -5,6 +5,38 @@ import { useState } from "react";
 
 export default function About() {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
+  const [response, setResponse] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSendData = async () => {
+    try {
+      setLoading(true);
+      console.log(JSON.stringify({ data: selectedItems }));
+      // Assuming Flask server is running on port 5000
+      const response = await fetch("http://localhost:8000/process-array", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ data: selectedItems }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const result = await response.json();
+      setResponse(result.message);
+    } catch (error) {
+      console.error("Error sending data:", error);
+      // Handle error properly regardless of its type
+      const errorMessage =
+        error instanceof Error ? error.message : String(error);
+      setResponse(`Error: ${errorMessage}`);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const items: string[] = [
     "Books",
@@ -64,9 +96,7 @@ export default function About() {
         </div>
         <div className="navigation-buttons">
           <div className="nav-button">
-            <button
-              className="circle-button"
-              onClick={() => console.log(selectedItems.toString())}>
+            <button className="circle-button" onClick={() => handleSendData()}>
               →
             </button>
             <p>Next</p>
