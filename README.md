@@ -1,4 +1,7 @@
 # HobbyPromoter
+
+Created for Hacklahoma 2025
+
 ## Product Overview
 This is an app designed for users that are unsure what they're interested in to find and recommend hobbies for them. It does this by 
 asking the user a series of questions in which we will then ask ChatGPT what it recommends based on the user's responses. Once it has 
